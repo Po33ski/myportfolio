@@ -1,0 +1,51 @@
+.create-diet-container {
+  text-align: center;
+}
+
+.diet-option {
+  display: inline-block;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.diet-option h3 {
+  margin-top: 0;
+}
+
+.diet-progress {
+  width: 200px;
+  height: 15px;
+  margin: 10px auto;
+  background-color: #eee;
+}
+
+.diet-progress-bar {
+  height: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.carbohydrates-bar {
+  background-color: #8bc34a;
+}
+
+.proteins-bar {
+  background-color: #2196f3;
+}
+
+.fats-bar {
+  background-color: #f44336;
+}
+
+.calorie-info {
+  margin-top: 100px;
+}
+
+.calorie-info li {
+  list-style: none;
+  margin-bottom: 5px;
+}
