@@ -10,7 +10,7 @@ import CreateDietPage from './components/CreateDietPage/CreateDietPage';
 
 
 export const App: React.FC= () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(false);
   const [BMR, setBMR] = useState<number>(0);
   
   const handleLogin = () => {

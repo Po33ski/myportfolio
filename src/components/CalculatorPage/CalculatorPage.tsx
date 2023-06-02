@@ -10,7 +10,6 @@ interface CalculateCaloriesData {
   weight: number;
   height: number;
   factorPAL: number;
-  target: number;
 };
 // I export this interface. 
 // I do this so as not to redefine the interface
@@ -21,7 +20,7 @@ export interface BMRProps {
 
 export const CalculatorPage: React.FC<BMRProps>= ({bmr, handleBMR}) => {
   const [BMR, setFactorBMR] = useState<number>(0);
-  const [isSub, setIsSubmitted] = useState<boolean>(false);
+  const [isSub, setIsSubmitted] = useState<boolean | null>(false);
   // useForm hook
   const {
     register,
@@ -37,22 +36,19 @@ export const CalculatorPage: React.FC<BMRProps>= ({bmr, handleBMR}) => {
       const weightValue : number = data.weight;
       const heightValue : number = data.height;
       const factorPALValue : number = data.factorPAL;
-      const targetValue : number = data.target;
       
       if (data.gender === "Man") {
         setFactorBMR(
           Math.round(
-            (66 + 13.7 * weightValue + 5 * heightValue - 6.8 * ageValue) *
-            factorPALValue +
-            targetValue
+            ((66 + 13.7 * weightValue + 5 * heightValue - 6.8 * ageValue) *
+            factorPALValue)
           )
         );
       } else if (data.gender === "Woman") {
         setFactorBMR(
           Math.round(
-            (665 + 9.6 * weightValue + 1.8 * heightValue - 4.7 * ageValue) *
-            factorPALValue+
-            targetValue
+            ((665 + 9.6 * weightValue + 1.8 * heightValue - 4.7 * ageValue) *
+            factorPALValue)
           )
         );
         
@@ -130,16 +126,6 @@ export const CalculatorPage: React.FC<BMRProps>= ({bmr, handleBMR}) => {
           <p style={{ color: "red" }}>Please select your activity.</p>
         )}
 
-        <h4>What do you want?</h4>
-        <select {...register("target", { required: true})}>
-          <option value="-500">to lose weight</option>
-          <option value="0">to keep my weight</option>
-          <option value="500">to gain weight</option>
-        </select>
-        {errors.target && (
-          <p style={{ color: "red" }}>Please select your target.</p>
-        )}
-
         <div>
           <input
             type="submit"
@@ -174,3 +160,17 @@ export const CalculatorPage: React.FC<BMRProps>= ({bmr, handleBMR}) => {
     </div>
   );
 };
+
+
+// This piece of code won't be finally used
+/*
+<h4>What do you want?</h4>
+        <select {...register("target")}>
+          <option value={-500}>to lose weight</option>
+          <option value={0}>to keep my weight</option>
+          <option value={500}>to gain weight</option>
+        </select>
+        {errors.target && ( 
+          <p style={{ color: "red" }}>Please select your target.</p>
+        )}
+*/
