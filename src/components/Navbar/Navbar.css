@@ -29,4 +29,22 @@ nav {
     background-color: #ffffff;
     color: #1a237e;
   }
+
+  .navbar .user {
+    display: outside;
+    justify-content: right;
+    align-items: right;
+    margin-right: 50px;
+  }
+  
+  .user p {
+    font-size: 15px;
+    margin-right: 10px;
+    color: white;
+  }
+  
+  .user img {
+    font-size: 15px;
+    border-radius: 50%;
+  }
   

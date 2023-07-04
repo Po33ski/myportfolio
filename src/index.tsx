@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {App} from './App';
+//import {Provider} from 'react-redux';
+
 
 // This is the root of the application 
 const root = ReactDOM.createRoot(
@@ -9,7 +11,7 @@ const root = ReactDOM.createRoot(
 // The app is rendered here
 root.render(
   <React.StrictMode>
-    <App />
+      <App />
   </React.StrictMode>
 );
 

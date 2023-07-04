@@ -22,7 +22,7 @@ You will be redirected to this page after pressing the "Create Diet" button on t
 I created this project using Type Script and React. 
 `
 
-const MainPage: React.FC = () => {
+export const MainPage: React.FC = () => {
   return (
     <div className="main-page">
       <h1>About Me</h1>
@@ -37,4 +37,3 @@ const MainPage: React.FC = () => {
   );
 }
 
-export default MainPage;

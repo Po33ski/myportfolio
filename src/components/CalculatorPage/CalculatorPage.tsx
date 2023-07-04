@@ -1,37 +1,47 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import {ChangeBMR} from '../ChangeBMR';
+import { useNavigate } from 'react-router-dom';
+import { useState, useContext} from "react";
 import "./CalculatorPage.css";
-
+import { AppContext, appContextType, IappContextData, ICalculateCaloriesData } from '../../App';
 // This interface has been used in form of the calculator
-interface CalculateCaloriesData {
-  gender: string;
-  age: number;
-  weight: number;
-  height: number;
-  factorPAL: number;
-};
-// I export this interface. 
-// I do this so as not to redefine the interface
-export interface BMRProps {
-  handleBMR: (bmr : number) => void;
-  bmr : number;
-};
 
-export const CalculatorPage: React.FC<BMRProps>= ({bmr, handleBMR}) => {
+
+export const CalculatorPage: React.FC = () => {
   const [BMR, setFactorBMR] = useState<number>(0);
   const [isSub, setIsSubmitted] = useState<boolean | null>(false);
+  const [calcData, setCalcData] = useState<ICalculateCaloriesData>({
+    gender: "Man",
+    age: 18,
+    weight: 80,
+    height: 180,
+    factorPAL: 1
+  });
+  const bmrContext = useContext<appContextType | null>(AppContext);
+  let bmr : number = bmrContext !== null ? bmrContext.BMR.bmr : 0;
+  //const bmr = () : number => bmrContext !== null ? bmrContext.BMR.bmr : 0;
+
+  const navigate = useNavigate();
+  const NavigateToCreateTarget = () => {
+    bmrContext?.handleBMR(BMR);
+    bmrContext?.handleCalculateCaloriesData(calcData);
+    console.log(`Is BMR: ${BMR}`);
+    console.log(`Is bmr: ${bmr}`);
+    console.log(`Is bmrContext.BMR.bmr: ${ bmrContext?.BMR.bmr}`);
+
+    navigate("/create-target"); // redirection to the crate diet page 
+};
   // useForm hook
   const {
     register,
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<CalculateCaloriesData>();
+  } = useForm<ICalculateCaloriesData>();
   // This function calculate the factor BMR
   // calculate the BMR using Harrisa-Benedict's formula
-  const onCreateCPM = (data: CalculateCaloriesData) => {
+  const onCreateCPM = (data: ICalculateCaloriesData) => {
     try {
+      
       const ageValue : number = data.age;
       const weightValue : number = data.weight;
       const heightValue : number = data.height;
@@ -58,6 +68,7 @@ export const CalculatorPage: React.FC<BMRProps>= ({bmr, handleBMR}) => {
     } catch (err) {
       console.log(err);
     }
+    setCalcData(data);
     console.log(data);
   };
   // The calculator component returns the validation form
@@ -125,7 +136,6 @@ export const CalculatorPage: React.FC<BMRProps>= ({bmr, handleBMR}) => {
         {errors.factorPAL && (
           <p style={{ color: "red" }}>Please select your activity.</p>
         )}
-
         <div>
           <input
             type="submit"
@@ -134,7 +144,6 @@ export const CalculatorPage: React.FC<BMRProps>= ({bmr, handleBMR}) => {
             onClick={() => setIsSubmitted(true)}
           />
         </div>
-
         <div>
           {isSub && (
             <input
@@ -150,7 +159,16 @@ export const CalculatorPage: React.FC<BMRProps>= ({bmr, handleBMR}) => {
         </div>
         <div>
           {isSub && (
-              <ChangeBMR bmr={BMR} handleBMR={handleBMR} />
+              <div>
+              <input
+                type="button"
+                onClick={() => {                  
+                  NavigateToCreateTarget();
+                  }}
+                value="Next"
+                className="buttonForm"
+              />
+          </div>
           )}
         </div>
         <div>
@@ -160,7 +178,6 @@ export const CalculatorPage: React.FC<BMRProps>= ({bmr, handleBMR}) => {
     </div>
   );
 };
-
 
 // This piece of code won't be finally used
 /*

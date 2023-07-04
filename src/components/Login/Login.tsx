@@ -1,8 +1,51 @@
 import React, { useState } from 'react';
+import {auth, emailProvider, googleProvider} from '../../config/firebase';
+import {signInWithPopup} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 
+interface LoginProps {
+  handleLogin: () => void;
+};
+
+
+// This component handles the log in pop up
+// On the project has been used google authentication
+export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
+
+  const navigate = useNavigate();
+  const signInWithGoogle = async () => {
+      const result = await signInWithPopup(auth, googleProvider);
+      handleLogin();
+      navigate("/"); // redirection to home page (calculator)
+  };
+
+  const signInWithEmail = async () => {
+    const result = await signInWithPopup(auth, emailProvider);
+    handleLogin();
+    navigate("/"); // redirection to home page (calculator)
+  };
+  return (
+    <div className="login-container">
+      <div className="login-card">
+        <p>Sign In with Google To Continue</p>
+        <div className="button-container">
+          <button onClick={signInWithGoogle}>Sign In With Google</button>
+        </div>
+
+        <p>Sign In with your Email To Continue</p>
+        <div className="button-container">
+          <button onClick={signInWithEmail}>Sign In With Email</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
+/*
 // This is the simply Login component. It checks if the password and ID is correct. 
 // The credentials has been added in the code. It is only for demostration
 interface LoginProps {
@@ -45,3 +88,4 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
 };
 
 export default Login;
+*/

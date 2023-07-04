@@ -28,10 +28,21 @@
   margin-bottom: 10px;
 }
 
-.formCalculator .submitForm,
+.submitForm{
+  inline-size: 150px;
+  block-size: 50px;
+  padding: 40px, 40px;
+  margin-top: 20%;
+  margin-bottom: 20%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .formCalculator .buttonForm {
-  padding: 10px 20px;
-  margin-top: 20px;
+  padding: 20%, 20%;
+  margin-top: 10%;
   background-color: #007bff;
   color: #fff;
   border: none;

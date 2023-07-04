@@ -2,7 +2,7 @@ import React from 'react';
 import './ContactPage.css';
 
 // simpy page with mu contact data
-const ContactPage: React.FC = () => {
+export const ContactPage: React.FC = () => {
   return (
     <div className="contact-page">
       <h1>Contact Page</h1>
@@ -18,4 +18,3 @@ const ContactPage: React.FC = () => {
   );
 };
 
-export default ContactPage;
